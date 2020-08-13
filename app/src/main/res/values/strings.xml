@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">SharedPreferenceStudy</string>
 
-    <string name="saved_string_key">SavedStringkey</string>
-    <string name="saved_int_key">SavedIntkey</string>
-    <string name="saved_boolean_key">SavedBooleankey</string>
+    <string name="saved_string_key">SavedStringKey</string>
+    <string name="saved_int_key">SavedIntKey</string>
+    <string name="saved_boolean_key">SavedBooleanKey</string>
 
 </resources>

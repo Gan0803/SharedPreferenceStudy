@@ -13,7 +13,7 @@
             android:name=".MyContentProvider"
             android:authorities="gan0803.pj.sharedpreferencestudy.provider"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

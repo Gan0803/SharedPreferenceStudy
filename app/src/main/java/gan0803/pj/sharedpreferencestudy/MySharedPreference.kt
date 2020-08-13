@@ -9,45 +9,49 @@ class MySharedPreference {
 
     companion object {
         private val TAG = MySharedPreference::class.java.simpleName
+        const val SAVED_STRING_KEY = "SavedStringKey"
+        const val SAVED_BOOLEAN_KEY = "SavedBooleanKey"
+        const val SAVED_INT_KEY = "SavedIntKey"
     }
 
-    private lateinit var prefs: SharedPreferences
+    private var prefs: SharedPreferences
 
-    fun savePreferences(activity: Activity) {
-        val sharedPref = activity.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
+    constructor(activity: Activity) {
+        prefs = activity.getSharedPreferences("savedPreferences", Context.MODE_PRIVATE)
+    }
+
+    fun savePreferences() {
+        with(prefs.edit()) {
             putString(
-                activity.resources.getString(gan0803.pj.sharedpreferencestudy.R.string.saved_string_key),
+                SAVED_STRING_KEY,
                 "test string"
             )
             putBoolean(
-                activity.resources.getString(gan0803.pj.sharedpreferencestudy.R.string.saved_boolean_key),
+                SAVED_BOOLEAN_KEY,
                 true
             )
             putInt(
-                activity.resources.getString(gan0803.pj.sharedpreferencestudy.R.string.saved_int_key),
+                SAVED_INT_KEY,
                 12345
             )
             commit()
         }
     }
 
-    fun readPreferences(activity: Activity) {
-
-        prefs = activity.getPreferences(Context.MODE_PRIVATE)
+    fun readPreferences() {
 
         val stringPreference = prefs.getString(
-            activity.resources.getString(R.string.saved_string_key),
+            SAVED_STRING_KEY,
             "default value"
         )
 
         val booleanPreference = prefs.getBoolean(
-            activity.resources.getString(R.string.saved_boolean_key),
+            SAVED_BOOLEAN_KEY,
             false
         )
 
         val intPreference = prefs.getInt(
-            activity.resources.getString(R.string.saved_int_key),
+            SAVED_INT_KEY,
             0
         )
 
