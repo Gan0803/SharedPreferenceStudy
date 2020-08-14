@@ -53,11 +53,13 @@ class MyContentProvider : ContentProvider() {
     }
 
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
+        val bundle = Bundle()
         Log.d(TAG, "call: {$method}")
         when (method) {
             MyPreferences.GET_STRING_PREFERENCE_METHOD -> {
                 Log.d(TAG, "get")
-                getStringPreference()
+                val str: String = getStringPreference()
+                bundle.putString(MyPreferences.SAVED_STRING_KEY, str)
             }
             MyPreferences.PUT_STRING_PREFERENCE_METHOD -> {
                 Log.d(TAG, "put")
@@ -73,7 +75,7 @@ class MyContentProvider : ContentProvider() {
             }
         }
 
-        return null
+        return bundle
     }
 
     private fun getStringPreference(): String {
