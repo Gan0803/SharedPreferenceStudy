@@ -98,15 +98,15 @@ class MyContentProvider : ContentProvider() {
     private fun savePreferences() {
         with(prefs.edit()) {
             putString(
-                MySharedPreference.SAVED_STRING_KEY,
+                SAVED_STRING_KEY,
                 "test string!"
             )
             putBoolean(
-                MySharedPreference.SAVED_BOOLEAN_KEY,
+                SAVED_BOOLEAN_KEY,
                 true
             )
             putInt(
-                MySharedPreference.SAVED_INT_KEY,
+                SAVED_INT_KEY,
                 1234567890
             )
             commit()
@@ -116,17 +116,17 @@ class MyContentProvider : ContentProvider() {
     private fun readPreferences() {
 
         val stringPreference = prefs.getString(
-            MySharedPreference.SAVED_STRING_KEY,
+            SAVED_STRING_KEY,
             "default value"
         )
 
         val booleanPreference = prefs.getBoolean(
-            MySharedPreference.SAVED_BOOLEAN_KEY,
+            SAVED_BOOLEAN_KEY,
             false
         )
 
         val intPreference = prefs.getInt(
-            MySharedPreference.SAVED_INT_KEY,
+            SAVED_INT_KEY,
             0
         )
 

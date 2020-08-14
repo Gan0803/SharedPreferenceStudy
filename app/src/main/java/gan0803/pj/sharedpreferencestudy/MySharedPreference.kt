@@ -9,9 +9,9 @@ class MySharedPreference {
 
     companion object {
         private val TAG = MySharedPreference::class.java.simpleName
-        const val SAVED_STRING_KEY = "SavedStringKey"
-        const val SAVED_BOOLEAN_KEY = "SavedBooleanKey"
-        const val SAVED_INT_KEY = "SavedIntKey"
+        const val SAVED_STRING_LOCAL_KEY = "SavedStringLocalKey"
+        const val SAVED_BOOLEAN_LOCAL_KEY = "SavedBooleanLocalKey"
+        const val SAVED_INT_LOCAL_KEY = "SavedIntLocalKey"
     }
 
     private var prefs: SharedPreferences
@@ -23,16 +23,16 @@ class MySharedPreference {
     fun savePreferences() {
         with(prefs.edit()) {
             putString(
-                SAVED_STRING_KEY,
-                "test string"
+                SAVED_STRING_LOCAL_KEY,
+                "test local string"
             )
             putBoolean(
-                SAVED_BOOLEAN_KEY,
-                true
+                SAVED_BOOLEAN_LOCAL_KEY,
+                false
             )
             putInt(
-                SAVED_INT_KEY,
-                12345
+                SAVED_INT_LOCAL_KEY,
+                987654321
             )
             commit()
         }
@@ -41,22 +41,22 @@ class MySharedPreference {
     fun readPreferences() {
 
         val stringPreference = prefs.getString(
-            SAVED_STRING_KEY,
+            SAVED_STRING_LOCAL_KEY,
             "default value"
         )
 
         val booleanPreference = prefs.getBoolean(
-            SAVED_BOOLEAN_KEY,
+            SAVED_BOOLEAN_LOCAL_KEY,
             false
         )
 
         val intPreference = prefs.getInt(
-            SAVED_INT_KEY,
+            SAVED_INT_LOCAL_KEY,
             0
         )
 
-        Log.d(TAG, "string: {$stringPreference}")
-        Log.d(TAG, "boolean: {$booleanPreference}")
-        Log.d(TAG, "int: {$intPreference}")
+        Log.d(TAG, "local string: {$stringPreference}")
+        Log.d(TAG, "local boolean: {$booleanPreference}")
+        Log.d(TAG, "local int: {$intPreference}")
     }
 }
