@@ -1,4 +1,4 @@
-package gan0803.pj.sharedpreferencestudy
+package gan0803.pj.sharedpreferencestudy.provider
 
 import android.content.ContentProvider
 import android.content.ContentValues
@@ -13,9 +13,7 @@ class MyContentProvider : ContentProvider() {
 
     companion object {
         private val TAG = ContentProvider::class.java.simpleName
-        const val SAVED_STRING_KEY = "SavedStringKey"
-        const val SAVED_BOOLEAN_KEY = "SavedBooleanKey"
-        const val SAVED_INT_KEY = "SavedIntKey"
+        const val SAVED_PREFERENCES = "savedPreferences"
     }
 
     private lateinit var prefs: SharedPreferences
@@ -36,7 +34,7 @@ class MyContentProvider : ContentProvider() {
     }
 
     override fun onCreate(): Boolean {
-        prefs = context!!.getSharedPreferences("savedPreferences", Context.MODE_PRIVATE)
+        prefs = context!!.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE)
         return true
     }
 
@@ -57,19 +55,19 @@ class MyContentProvider : ContentProvider() {
     override fun call(method: String, arg: String?, extras: Bundle?): Bundle? {
         Log.d(TAG, "call: {$method}")
         when (method) {
-            "getStringPreference" -> {
+            MyPreferences.GET_STRING_PREFERENCE_METHOD -> {
                 Log.d(TAG, "get")
                 getStringPreference()
             }
-            "putStringPreference" -> {
+            MyPreferences.PUT_STRING_PREFERENCE_METHOD -> {
                 Log.d(TAG, "put")
                 putStringPreference(arg ?: "")
             }
-            "savePreferences" -> {
+            MyPreferences.SAVE_PREFERENCE_METHOD -> {
                 Log.d(TAG, "save")
                 savePreferences()
             }
-            "readPreferences" -> {
+            MyPreferences.READ_PREFERENCE_METHOD -> {
                 Log.d(TAG, "read")
                 readPreferences()
             }
@@ -80,7 +78,7 @@ class MyContentProvider : ContentProvider() {
 
     private fun getStringPreference(): String {
         return prefs.getString(
-            SAVED_STRING_KEY,
+            MyPreferences.SAVED_STRING_KEY,
             "default value"
         ) ?: ""
     }
@@ -88,7 +86,7 @@ class MyContentProvider : ContentProvider() {
     private fun putStringPreference(str: String) {
         with(prefs.edit()) {
             putString(
-                SAVED_STRING_KEY,
+                MyPreferences.SAVED_STRING_KEY,
                 str
             )
             commit()
@@ -98,15 +96,15 @@ class MyContentProvider : ContentProvider() {
     private fun savePreferences() {
         with(prefs.edit()) {
             putString(
-                SAVED_STRING_KEY,
+                MyPreferences.SAVED_STRING_KEY,
                 "test string!"
             )
             putBoolean(
-                SAVED_BOOLEAN_KEY,
+                MyPreferences.SAVED_BOOLEAN_KEY,
                 true
             )
             putInt(
-                SAVED_INT_KEY,
+                MyPreferences.SAVED_INT_KEY,
                 1234567890
             )
             commit()
@@ -116,17 +114,17 @@ class MyContentProvider : ContentProvider() {
     private fun readPreferences() {
 
         val stringPreference = prefs.getString(
-            SAVED_STRING_KEY,
+            MyPreferences.SAVED_STRING_KEY,
             "default value"
         )
 
         val booleanPreference = prefs.getBoolean(
-            SAVED_BOOLEAN_KEY,
+            MyPreferences.SAVED_BOOLEAN_KEY,
             false
         )
 
         val intPreference = prefs.getInt(
-            SAVED_INT_KEY,
+            MyPreferences.SAVED_INT_KEY,
             0
         )
 
