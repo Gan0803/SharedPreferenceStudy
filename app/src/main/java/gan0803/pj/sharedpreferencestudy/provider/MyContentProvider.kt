@@ -34,8 +34,13 @@ class MyContentProvider : ContentProvider() {
     }
 
     override fun onCreate(): Boolean {
-        prefs = context!!.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE)
-        return true
+        if (context != null) {
+            prefs = context!!.getSharedPreferences(SAVED_PREFERENCES, Context.MODE_PRIVATE)
+            return true
+        } else {
+            Log.d(TAG, "context is null")
+            return false
+        }
     }
 
     override fun query(
